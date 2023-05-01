@@ -3,6 +3,7 @@
 Тривиальный случай - если ячейка пустая
 Время выполнения Time:O(n) - пройти по каждому элементу
 Сложность обработки алгоритма по памяти Space: O(n) - В стеке рекурсии будут все вершины от дерева
+Ответ:13
 """
 
 
@@ -23,6 +24,19 @@ item_g = Item(7, item_left=item_d, item_right=item_e)
 item_h = Item(1, item_left=item_f, item_right=item_g)
 
 
+class Solution:
+    @classmethod
+    def sum(cls, root: Item):
+        if root is None:
+            return 0
+        sum_left = cls.sum(root.item_left)
+        sum_right = cls.sum(root.item_right)
+        return max(sum_left, sum_right) + root.value
+
+
+print("2 day", Solution.sum(item_h))
+
+
 def find_sum(item: Item):
     if item is None:  # Тривиальный случай
         return 0
@@ -31,4 +45,4 @@ def find_sum(item: Item):
     return max(sum_left, sum_right) + item.value
 
 
-print(find_sum(item_h))
+print("1 day", find_sum(item_h))

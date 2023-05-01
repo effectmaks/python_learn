@@ -3,6 +3,8 @@
 DFS - поиск в глубину?
 Время выполнения Time:O(n) - пройти по каждому элементу
 Сложность обработки алгоритма по памяти Space: O(n) - В стеке рекурсии будут все вершины от дерева
+Ответ: 30
+Найти максимальную сумму соседних нод
 """
 
 
@@ -25,6 +27,27 @@ item_e = Item(-10, left=item_h, right=item_g)
 
 
 class Solution:
+    answer: int = 0
+
+    @classmethod
+    def _sum(cls, root: Item) -> int:
+        if root is None:
+            return 0
+        sum_left = max(cls._sum(root.left), 0)
+        sum_right = max(cls._sum(root.right), 0)
+        cls.answer = max(cls.answer, sum_left + sum_right + root.value)
+        return max(sum_left, sum_right) + root.value
+
+    @classmethod
+    def calc(cls, root) -> int:
+        cls._sum(root)
+        return cls.answer
+
+
+print('2 day', Solution.calc(item_e))
+
+
+class Solution:
     def __init__(self):
         self.answer: int = 0
 
@@ -43,7 +66,7 @@ class Solution:
 
 
 sol = Solution()
-print("find_sum_ng", sol.find_sum_ng(item_e))
+print("1 day", sol.find_sum_ng(item_e))
 
 
 
